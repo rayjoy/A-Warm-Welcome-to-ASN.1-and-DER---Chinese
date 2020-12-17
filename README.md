@@ -423,9 +423,9 @@ The long form is at least two bytes long, and has bit 8 of the first byte set to
 
 长格式至少有两个字节长，第一个字节的第8位设置为1。第一个字节的1-7位表示长度字段本身有多少个字节。然后剩余的字节将以多字节整数的形式表示长度本身。
 
-As you can imagine, this allows very long values. The longest possible length would start with the byte 254 (a length byte of 255 is reserved for future extensions), specifying that 126 more bytes would follow in the length field alone. If each of those 126 bytes was 255, that would indicate $2^{1008}-1$ bytes to follow in the value field.
+As you can imagine, this allows very long values. The longest possible length would start with the byte 254 (a length byte of 255 is reserved for future extensions), specifying that 126 more bytes would follow in the length field alone. If each of those 126 bytes was 255, that would indicate 2<sup>1008</sup> - 1 bytes to follow in the value field.
 
-正如您可以想象的，这允许表示非常长的值。最长的可能长度将从字节254开始（长度字节255是为将来的扩展保留的），指定仅在长度字段后面还有126个字节。如果这126个字节中的每一个都是255，这就表示在value字段中有$2^{1008}-1$个字节。
+正如您可以想象的，这允许表示非常长的值。最长的可能长度将从字节254开始（长度字节255是为将来的扩展保留的），指定仅在长度字段后面还有126个字节。如果这126个字节中的每一个都是255，这就表示在value字段中有2<sup>1008</sup> - 1个字节。
 
 The long form allows you to encode the same length multiple ways - for instance by using two bytes to express a length that could fit in one, or by using long form to express a length that could fit in the short form. DER says to always use the smallest possible length representation.
 
@@ -550,9 +550,9 @@ This one-byte value (represented in binary) encodes decimal -100:
 
 > 10011100 (== decimal -100)
 
-This five-bytes value (represented in binary) encodes decimal -549755813887 (i.e. $-2^{39} + 1$):
+This five-bytes value (represented in binary) encodes decimal -549755813887 (i.e. -2<sup>39</sup> + 1):
 
-这个5字节值（以二进制表示）编码十进制数 -549755813887（即$-2^{39} + 1$）：
+这个5字节值（以二进制表示）编码十进制数 -549755813887（即-2<sup>39</sup> + 1）：
 
 > 10000000 00000000 00000000 00000000 00000001 (== decimal -549755813887)
 
@@ -601,9 +601,9 @@ The two’s complement encoding of INTEGERs has practical impact in certificate 
 
 这两种整数(INTEGERs)的补码编码在证书颁发中有实际的影响：RFC 5280 要求序列号为正。由于第一位总是符号位，这意味着以8字节的顺序编码的序列号最多可以有63位长。编码64位正序列号需要9字节的编码值（第一个字节为零）。
 
-Here’s the encoding of an INTEGER with the value $$ 2^{63} + 1 $$ (which happens to be a 64-bit positive number):
+Here’s the encoding of an INTEGER with the value 2<sup>63</sup> + 1 (which happens to be a 64-bit positive number):
 
-下面是一个值为$$ 2^{63}+1$$（正好是一个64位正数）的整数的编码：
+下面是一个值为 2<sup>63</sup> + 1（正好是一个64位正数）的整数的编码：
 
 > 02 09 00 80 00 00 00 00 00 00 01
 
